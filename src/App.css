@@ -1,38 +1,162 @@
-.App {
-  text-align: center;
+:root {
+  --light-blue: #039be5;
+  --blue-grey-light: #eceff1;
+  --blue-grey: #37474f;
+  --light-cyan: #b2ebf2;
+  --orange: #ffab40;
+  --green: #00c853;
+  --red: #ff1744;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#app { 
+  display: grid;
+  grid-template-columns: 25vw 75vw;
+  grid-template-rows: 10vh 90vh;
+  grid-template-areas:
+    "header header"
+    "nav ledger";
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+#main-header {
+  grid-area: header;
+  background: var(--orange);
+  display: grid;
+  height: 10vh;
+  width: 100%;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+    "logo title github"
+    "logo title twitter";
+  justify-items: center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+#logo {
+  grid-area: logo;
+  height: auto;
+  width: auto;
+}
+#main-header > h3 {
+  grid-area: title;
+}
+#github {
+  grid-area: github;
+  justify-self: right;
+  align-self: center;
+}
+#twitter {
+  grid-area: twitter;
+  justify-self: right;
+  align-self: center;
+}
+#github > svg, #twitter > svg {
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+#nav {
+  grid-area: nav;
+  background: var(--blue-grey);
+}
+#nav > nav {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "controls"
+    "form"
+    ".";
+}
+#form-controls {
+  grid-area: controls;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+#form-section {
+  grid-area: form;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+#form-container {
+  display: grid;
+  height: 300px;
+  width: 200px;
+  justify-content: center;
+  align-content: center;
+  background: var(--blue-grey-light);
+  border-radius: 2%;
+}
+#income-form, #expense-form {
+  height: 300px;
+  width: 200px;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+#income-form > h3, #expense-form > h3 {
+  font-size: 24px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+#income-form > label, #expense-form > label {
+  font-weight: bold;
+}
+#income-form > button, #expense-form > button {
+  font-weight: bold;
+  color: white;
+  background: var(--light-blue);
+}
+#ledger {
+  grid-area: ledger;
+  background: var(--light-cyan);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 30% 70%;
+  grid-template-areas:
+    "balances balances"
+    "income expenses";
+  justify-items: center;
+}
+#balance-display {
+  grid-area: balances;
+  height: 100%;
+  width: 100%;
+}
+#income-table-container {
+  grid-area: income;
+  height: 100%;
+  width: 100%;
+  background: inherit;
+  padding: 20px;
+}
+#expense-table-container {
+  grid-area: expenses;
+  height: 100%;
+  width: 100%;
+  background: inherit;
+  padding: 20px;
+}
+#income-table, #expense-table {
+  background: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dark-thead {
+  background: var(--blue-grey);
+  color: white;
+}
+.dark-thead > tr > th {
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: center;
+}
+.gain {
+  color: var(--green);
+}
+.loss {
+  color: var(--red);
 }
