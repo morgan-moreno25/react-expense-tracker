@@ -7,7 +7,7 @@ import Nav from './Components/Nav';
 import Ledger from './Components/Ledger';
 
 
-const App = () =>  {
+export default function App(){
   const [ income, setIncome ] = useState([]);
   const [ expenses, setExpenses ] = useState([]);
   const [ incomeId, setIncomeId ] = useState(0);
