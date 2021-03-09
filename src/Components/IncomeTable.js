@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteIncome } from '../Store/slices/income.slice';
+
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,41 +12,54 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-class IncomeTable extends React.Component  {
+export default function IncomeTable() {
+	const dispatch = useDispatch();
 
-    
+	const income = useSelector(state => state.income.data);
 
-    render(){
-        return (
-            <TableContainer component={Paper} id="income-table-container">
-                <Table id="income-table">
-                    <TableHead className="dark-thead">
-                        <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell>CATEGORY</TableCell>
-                            <TableCell>AMOUNT</TableCell>
-                            <TableCell>DELETE</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.props.income.map(income => (
-                            <TableRow data-id={income._id} key={income.id}>
-                                <TableCell scope="row" style={cellStyle}>{ income.id }</TableCell>
-                                <TableCell style={cellStyle}>{ income.category }</TableCell>
-                                <TableCell style={cellStyle}>{ income.amount }</TableCell>
-                                <TableCell style={cellStyle}><Button onClick={this.props.delete}><DeleteForeverIcon></DeleteForeverIcon></Button></TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        )
-    }
-    
-};
+	const handleDelete = async id => {
+		const resultAction = await dispatch(deleteIncome({ id }));
+
+		if (deleteIncome.fulfilled.match(resultAction)) {
+			console.log(resultAction.payload);
+		} else {
+			console.log(resultAction.payload);
+		}
+	};
+
+	return (
+		<TableContainer component={Paper} id='income-table-container'>
+			<Table id='income-table'>
+				<TableHead className='dark-thead'>
+					<TableRow>
+						<TableCell>ID</TableCell>
+						<TableCell>CATEGORY</TableCell>
+						<TableCell>AMOUNT</TableCell>
+						<TableCell>DELETE</TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{income.map(i => (
+						<TableRow data-id={i.id} key={i.id}>
+							<TableCell scope='row' style={cellStyle}>
+								{i.id}
+							</TableCell>
+							<TableCell style={cellStyle}>{i.category}</TableCell>
+							<TableCell style={cellStyle}>{i.amount}</TableCell>
+							<TableCell style={cellStyle}>
+								<Button onClick={() => handleDelete(id)}>
+									<DeleteForeverIcon></DeleteForeverIcon>
+								</Button>
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
+		</TableContainer>
+	);
+}
+
 const cellStyle = {
-    textAlign: 'center',
-    fontWeight: 'bold',
+	textAlign: 'center',
+	fontWeight: 'bold',
 };
-
-export default IncomeTable;
