@@ -47,7 +47,7 @@ export default function IncomeTable() {
 							<TableCell style={cellStyle}>{i.category}</TableCell>
 							<TableCell style={cellStyle}>{i.amount}</TableCell>
 							<TableCell style={cellStyle}>
-								<Button onClick={() => handleDelete(id)}>
+								<Button onClick={() => handleDelete(i.id)}>
 									<DeleteForeverIcon></DeleteForeverIcon>
 								</Button>
 							</TableCell>
