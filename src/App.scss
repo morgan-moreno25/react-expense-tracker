@@ -1,12 +1,13 @@
-:root {
-	--light-blue: #039be5;
-	--blue-grey-light: #eceff1;
-	--blue-grey: #37474f;
-	--light-cyan: #b2ebf2;
-	--orange: #ffab40;
-	--green: #00c853;
-	--red: #ff1744;
-}
+$primary: #039be5;
+$secondary: #37474f;
+$light: #b2ebf2;
+$light-gray: #d3e1e8;
+$dark: #212b30;
+$warning: #ffab40;
+$success: #00c853;
+$danger: #ff1744;
+$white: #fff;
+$black: #000;
 
 /* Main */
 
@@ -18,46 +19,117 @@
 		'header'
 		'content';
 }
+
 #main-header {
 	grid-area: header;
-	background: var(--orange);
+	background: $warning;
 	display: grid;
 	height: 10vh;
 	width: 100%;
-	grid-template-columns: 10% 70% 20%;
-	grid-template-rows: 1fr;
+	grid-template-columns: 20% 60% 20%;
 	grid-template-areas: 'logo title buttons';
 	justify-items: center;
 	align-items: center;
-}
-#logo {
-	grid-area: logo;
-	height: auto;
-	width: auto;
-}
-#main-header > h3 {
-	grid-area: title;
-}
-#header-buttons {
-	grid-area: buttons;
-	height: 100%;
-	width: 100%;
-	padding: 25px;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-}
-#login-button,
-#register-button {
-	justify-self: center;
-	align-self: center;
+
+	#logo {
+		grid-area: logo;
+		height: 100%;
+		width: 100%;
+		display: grid;
+		justify-items: center;
+		align-items: center;
+
+		svg {
+			height: 4rem;
+			width: 4rem;
+		}
+	}
+
+	#header-title {
+		grid-area: title;
+		font-weight: bold;
+		text-shadow: 1px 1px $primary;
+	}
+	#header-buttons {
+		grid-area: buttons;
+		height: 100%;
+		width: 100%;
+		padding: 25px;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+
+		#login-button,
+		#register-button {
+			justify-self: center;
+			align-self: center;
+			font-weight: bold;
+
+			span {
+				font-size: 1.2rem;
+			}
+		}
+
+		#login-button {
+			background-color: $primary;
+		}
+		#register-button {
+			background-color: $secondary;
+			color: $light;
+		}
+	}
 }
 
-/* Login Page*/
-#login {
+#content {
 	grid-area: content;
+	background-color: $light;
+}
+
+/* Authentication Forms */
+#login,
+#register {
+	height: 100%;
+	width: 100%;
 	display: grid;
 	justify-items: center;
 	align-items: center;
+
+	#login-form,
+	#register-form {
+		height: 60%;
+		width: 50%;
+		padding: 2rem 4rem 0rem 4rem;
+		background: $light-gray;
+		display: grid;
+		grid-template-rows: repeat(5, 1fr);
+		align-items: center;
+
+		h3 {
+			text-align: center;
+			font-weight: bold;
+			border-bottom: 2px solid $dark;
+			color: $dark;
+			padding-bottom: 0.5rem;
+		}
+
+		div > label {
+			font-size: 1.6rem;
+		}
+
+		input {
+			font-size: 1.6rem;
+		}
+
+		a {
+			text-align: center;
+			font-size: 1.2rem;
+		}
+
+		button {
+			color: $white;
+			background-color: $primary;
+			height: 35%;
+		}
+	}
 }
 
 /* Register Page */
@@ -65,7 +137,7 @@
 /* App Content */
 #nav {
 	grid-area: nav;
-	background: var(--blue-grey);
+	background: $secondary;
 }
 #nav > nav {
 	height: 100%;
@@ -124,11 +196,11 @@
 #expense-form > button {
 	font-weight: bold;
 	color: white;
-	background: var(--light-blue);
+	background: $primary;
 }
 #ledger {
 	grid-area: ledger;
-	background: var(--light-cyan);
+	background: $light;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 30% 70%;
@@ -161,8 +233,10 @@
 	background: white;
 }
 
+/* Table Classes*/
+
 .dark-thead {
-	background: var(--blue-grey);
+	background: $secondary;
 	color: white;
 }
 .dark-thead > tr > th {
@@ -171,9 +245,11 @@
 	text-decoration: underline;
 	text-align: center;
 }
+
+/* Font Classes */
 .gain {
-	color: var(--green);
+	color: $success;
 }
 .loss {
-	color: var(--red);
+	color: $danger;
 }
