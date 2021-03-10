@@ -12,7 +12,7 @@ export const getAllIncome = createAsyncThunk('income/getAll', async (_, thunkAPI
 		};
 		return payload;
 	} catch (error) {
-		return thunkAPI.rejectWithValue(error);
+		return thunkAPI.rejectWithValue(error.response.data);
 	}
 });
 export const addIncome = createAsyncThunk('income/add', async ({ category, amount }, thunkAPI) => {
@@ -26,21 +26,38 @@ export const addIncome = createAsyncThunk('income/add', async ({ category, amoun
 		};
 		return payload;
 	} catch (error) {
-		return thunkAPI.rejectWithValue(error);
+		return thunkAPI.rejectWithValue(error.response.data);
 	}
 });
+export const updateIncome = createAsyncThunk(
+	'income/update',
+	async ({ id, income: { category, amount } }, thunkAPI) => {
+		const body = JSON.stringify({ category, amount });
+		const config = tokenConfig(thunkAPI.getState);
+
+		try {
+			const response = await axios.put(`/api/income/${id}`, body, config);
+			const payload = {
+				id,
+				updatedIncome: response.data.updatedIncome,
+			};
+			return payload;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
+	}
+);
 export const deleteIncome = createAsyncThunk('income/delete', async ({ id }, thunkAPI) => {
 	const config = tokenConfig(thunkAPI.getState);
 
 	try {
-		const response = await axios.delete(`/api/income/${id}`, config);
+		await axios.delete(`/api/income/${id}`, config);
 		const payload = {
 			id,
-			income: response.data.income,
 		};
 		return payload;
 	} catch (error) {
-		return thunkAPI.rejectWithValue(error);
+		return thunkAPI.rejectWithValue(error.response.data);
 	}
 });
 
@@ -59,6 +76,9 @@ const incomeSlice = createSlice({
 		builder.addCase(addIncome.pending, state => {
 			state.isLoading = true;
 		});
+		builder.addCase(updateIncome.pending, state => {
+			state.isLoading = true;
+		});
 		builder.addCase(deleteIncome.pending, state => {
 			state.isLoading = true;
 		});
@@ -70,6 +90,13 @@ const incomeSlice = createSlice({
 			state.isLoading = false;
 			state.data.push(payload.income);
 		});
+		builder.addCase(updateIncome.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			const index = state.data.findIndex(x => x.id === payload.id);
+			if (index !== -1) {
+				state.data.splice(index, 1, payload.updatedIncome);
+			}
+		});
 		builder.addCase(deleteIncome.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
 			state.data = state.data.filter(d => d.id !== payload.id);
@@ -79,6 +106,10 @@ const incomeSlice = createSlice({
 			state.error = payload;
 		});
 		builder.addCase(addIncome.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload;
+		});
+		builder.addCase(updateIncome.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			state.error = payload;
 		});
