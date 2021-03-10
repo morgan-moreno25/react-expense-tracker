@@ -1,162 +1,164 @@
 :root {
-  --light-blue: #039be5;
-  --blue-grey-light: #eceff1;
-  --blue-grey: #37474f;
-  --light-cyan: #b2ebf2;
-  --orange: #ffab40;
-  --green: #00c853;
-  --red: #ff1744;
+	--light-blue: #039be5;
+	--blue-grey-light: #eceff1;
+	--blue-grey: #37474f;
+	--light-cyan: #b2ebf2;
+	--orange: #ffab40;
+	--green: #00c853;
+	--red: #ff1744;
 }
 
-#app { 
-  display: grid;
-  grid-template-columns: 25vw 75vw;
-  grid-template-rows: 10vh 90vh;
-  grid-template-areas:
-    "header header"
-    "nav ledger";
+#app {
+	display: grid;
+	grid-template-columns: 25vw 75vw;
+	grid-template-rows: 10vh 90vh;
+	grid-template-areas:
+		'header header'
+		'nav ledger';
 }
 #main-header {
-  grid-area: header;
-  background: var(--orange);
-  display: grid;
-  height: 10vh;
-  width: 100%;
-  grid-template-columns: 10% 80% 10%;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas: 
-    "logo title github"
-    "logo title twitter";
-  justify-items: center;
-  align-items: center;
+	grid-area: header;
+	background: var(--orange);
+	display: grid;
+	height: 10vh;
+	width: 100%;
+	grid-template-columns: 10% 80% 10%;
+	grid-template-rows: 1fr;
+	grid-template-areas: 'logo title buttons';
+	justify-items: center;
+	align-items: center;
 }
 #logo {
-  grid-area: logo;
-  height: auto;
-  width: auto;
+	grid-area: logo;
+	height: auto;
+	width: auto;
 }
 #main-header > h3 {
-  grid-area: title;
+	grid-area: title;
 }
-#github {
-  grid-area: github;
-  justify-self: right;
-  align-self: center;
+#header-buttons {
+	grid-area: buttons;
+	padding-left: 5px;
+	padding-right: 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 10px;
 }
-#twitter {
-  grid-area: twitter;
-  justify-self: right;
-  align-self: center;
-}
-#github > svg, #twitter > svg {
-  color: white;
+#github > svg,
+#twitter > svg {
+	color: white;
 }
 #nav {
-  grid-area: nav;
-  background: var(--blue-grey);
+	grid-area: nav;
+	background: var(--blue-grey);
 }
 #nav > nav {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-areas:
-    "controls"
-    "form"
-    ".";
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-areas:
+		'controls'
+		'form'
+		'.';
 }
 #form-controls {
-  grid-area: controls;
-  display: grid;
-  justify-items: center;
-  align-items: center;
+	grid-area: controls;
+	display: grid;
+	justify-items: center;
+	align-items: center;
 }
 #form-section {
-  grid-area: form;
-  display: grid;
-  justify-items: center;
-  align-items: center;
+	grid-area: form;
+	display: grid;
+	justify-items: center;
+	align-items: center;
 }
 #form-container {
-  display: grid;
-  height: 300px;
-  width: 200px;
-  justify-content: center;
-  align-content: center;
-  background: var(--blue-grey-light);
-  border-radius: 2%;
+	display: grid;
+	height: 300px;
+	width: 200px;
+	justify-content: center;
+	align-content: center;
+	background: var(--blue-grey-light);
+	border-radius: 2%;
 }
-#income-form, #expense-form {
-  height: 300px;
-  width: 200px;
-  padding: 5px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
-  justify-items: center;
-  align-items: center;
+#income-form,
+#expense-form {
+	height: 300px;
+	width: 200px;
+	padding: 5px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(4, 1fr);
+	justify-items: center;
+	align-items: center;
 }
-#income-form > h3, #expense-form > h3 {
-  font-size: 24px;
-  text-decoration: underline;
-  font-weight: bold;
+#income-form > h3,
+#expense-form > h3 {
+	font-size: 24px;
+	text-decoration: underline;
+	font-weight: bold;
 }
-#income-form > label, #expense-form > label {
-  font-weight: bold;
+#income-form > label,
+#expense-form > label {
+	font-weight: bold;
 }
-#income-form > button, #expense-form > button {
-  font-weight: bold;
-  color: white;
-  background: var(--light-blue);
+#income-form > button,
+#expense-form > button {
+	font-weight: bold;
+	color: white;
+	background: var(--light-blue);
 }
 #ledger {
-  grid-area: ledger;
-  background: var(--light-cyan);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 30% 70%;
-  grid-template-areas:
-    "balances balances"
-    "income expenses";
-  justify-items: center;
+	grid-area: ledger;
+	background: var(--light-cyan);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 30% 70%;
+	grid-template-areas:
+		'balances balances'
+		'income expenses';
+	justify-items: center;
 }
 #balance-display {
-  grid-area: balances;
-  height: 100%;
-  width: 100%;
+	grid-area: balances;
+	height: 100%;
+	width: 100%;
 }
 #income-table-container {
-  grid-area: income;
-  height: 100%;
-  width: 100%;
-  background: inherit;
-  padding: 20px;
+	grid-area: income;
+	height: 100%;
+	width: 100%;
+	background: inherit;
+	padding: 20px;
 }
 #expense-table-container {
-  grid-area: expenses;
-  height: 100%;
-  width: 100%;
-  background: inherit;
-  padding: 20px;
+	grid-area: expenses;
+	height: 100%;
+	width: 100%;
+	background: inherit;
+	padding: 20px;
 }
-#income-table, #expense-table {
-  background: white;
+#income-table,
+#expense-table {
+	background: white;
 }
 
 .dark-thead {
-  background: var(--blue-grey);
-  color: white;
+	background: var(--blue-grey);
+	color: white;
 }
 .dark-thead > tr > th {
-  color: white;
-  font-weight: bold;
-  text-decoration: underline;
-  text-align: center;
+	color: white;
+	font-weight: bold;
+	text-decoration: underline;
+	text-align: center;
 }
 .gain {
-  color: var(--green);
+	color: var(--green);
 }
 .loss {
-  color: var(--red);
+	color: var(--red);
 }
