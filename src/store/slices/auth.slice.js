@@ -62,7 +62,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 	const config = tokenConfig(thunkAPI.getState);
 
 	try {
-		const response = await axios.post('/api/auth/logout', (config = config));
+		const response = await axios.post('/api/auth/logout', {}, config);
 
 		const payload = {
 			msg: response.data.message,
