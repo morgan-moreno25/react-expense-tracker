@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addExpense } from '../Store/slices/expense.slice';
-import { addIncome } from '../Store/slices/income.slice';
+import { addExpense } from '../store/slices/expense.slice';
+import { addIncome } from '../store/slices/income.slice';
 
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';

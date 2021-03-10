@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import './App.css';
 
-import Header from './Components/Header';
-import Nav from './Components/Nav';
-import Ledger from './Components/Ledger';
+import Header from './components/Header';
+import Nav from './components/Nav';
+import Ledger from './components/Ledger';
 
 export default function App() {
 	return (
@@ -14,4 +14,3 @@ export default function App() {
 		</div>
 	);
 }
-export default App;

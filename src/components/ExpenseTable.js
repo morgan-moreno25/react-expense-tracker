@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteExpense } from '../Store/slices/expense.slice';
+import { deleteExpense } from '../store/slices/expense.slice';
 
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
