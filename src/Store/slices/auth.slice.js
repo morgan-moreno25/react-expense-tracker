@@ -11,7 +11,7 @@ export const login = createAsyncThunk('auth/login', async ({ username, password 
 	};
 
 	try {
-		const response = await axios.post('/api/auth', body, config);
+		const response = await axios.post('/api/auth/login', body, config);
 
 		const payload = {
 			token: response.data.access_token,
@@ -34,7 +34,7 @@ export const register = createAsyncThunk(
 		};
 
 		try {
-			const response = await axios.post('/auth/register', body, config);
+			const response = await axios.post('/api/auth/register', body, config);
 			const payload = {
 				token: response.data.access_token,
 				user: response.data.user,
@@ -58,6 +58,20 @@ export const loadUser = createAsyncThunk('auth/loadUser', async (_, thunkAPI) =>
 		return thunkAPI.rejectWithValue(error);
 	}
 });
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+	const config = tokenConfig(thunkAPI.getState);
+
+	try {
+		const response = await axios.post('/api/auth/logout', (config = config));
+
+		const payload = {
+			msg: response.data.message,
+		};
+		return payload;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.response.data);
+	}
+});
 
 const authSlice = createSlice({
 	name: 'auth',
@@ -68,17 +82,7 @@ const authSlice = createSlice({
 		isLoading: false,
 		error: null,
 	},
-	reducers: {
-		logout: state => {
-			localStorage.removeItem('token');
-
-			state.token = '';
-			state.user = null;
-			state.authenticated = false;
-			state.isLoading = false;
-			state.error = null;
-		},
-	},
+	reducers: {},
 	extraReducers: builder => {
 		builder.addCase(login.pending, state => {
 			state.error = null;
@@ -92,6 +96,9 @@ const authSlice = createSlice({
 			state.user = null;
 			state.authenticated = false;
 			state.error = null;
+			state.isLoading = true;
+		});
+		builder.addCase(logout.pending, state => {
 			state.isLoading = true;
 		});
 		builder.addCase(login.fulfilled, (state, { payload }) => {
@@ -115,6 +122,14 @@ const authSlice = createSlice({
 			state.authenticated = true;
 			state.isLoading = false;
 		});
+		builder.addCase(logout.fulfilled, (state, { payload }) => {
+			localStorage.removeItem('token');
+
+			state.isLoading = false;
+			state.token = '';
+			state.user = null;
+			state.authenticated = false;
+		});
 		builder.addCase(login.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			state.error = payload;
@@ -130,9 +145,14 @@ const authSlice = createSlice({
 			state.isLoading = false;
 			state.error = payload;
 		});
+		builder.addCase(logout.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.token = '';
+			state.user = null;
+			state.authenticated = false;
+			state.error = payload;
+		});
 	},
 });
-
-export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;
