@@ -59,7 +59,9 @@ $black: #000;
 		grid-template-columns: 1fr 1fr;
 
 		#login-button,
-		#register-button {
+		#register-button,
+		#profile-button,
+		#logout-button {
 			justify-self: center;
 			align-self: center;
 			font-weight: bold;
@@ -75,6 +77,18 @@ $black: #000;
 		#register-button {
 			background-color: $secondary;
 			color: $light;
+		}
+		#profile-button {
+			color: $white;
+			background: $black;
+		}
+		#logout-button {
+			background-color: $danger;
+			color: $white;
+
+			span {
+				font-weight: bold;
+			}
 		}
 	}
 }
