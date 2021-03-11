@@ -33,7 +33,7 @@ function NavButtons({ user }) {
 		<div id='header-buttons'>
 			<Button variant='contained' id='profile-button'>
 				<Link to={`/profile/${user.username}`} id='profile-button'>
-					<AccountCircleSharp fontSize='medium' />
+					<AccountCircleSharp /> Profile
 				</Link>
 			</Button>
 			<Button id='logout-button' variant='contained'>
