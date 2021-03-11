@@ -73,6 +73,10 @@ $black: #000;
 
 		#login-button {
 			background-color: $primary;
+
+			a {
+				color: $white;
+			}
 		}
 		#register-button {
 			background-color: $secondary;
