@@ -107,11 +107,6 @@ $black: #000;
 	}
 }
 
-#content {
-	grid-area: content;
-	background-color: $light;
-}
-
 /* Authentication Forms */
 #login,
 #register {
@@ -161,6 +156,18 @@ $black: #000;
 }
 
 /* App Content */
+
+#content {
+	height: 90vh;
+	width: 100vw;
+	padding: 0;
+	grid-area: content;
+	background-color: $light;
+	display: grid;
+	grid-template-columns: 25% 75%;
+	grid-template-areas: 'nav ledger';
+}
+
 #nav {
 	grid-area: nav;
 	background: $secondary;
