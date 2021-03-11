@@ -1,31 +1,54 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import AppBar from '@material-ui/core/AppBar';
-import Icon from '@material-ui/core/Icon';
-import MonetizationIcon from '@material-ui/icons/MonetizationOn';
-import { Button, Typography } from '@material-ui/core';
+import { MonetizationOnRounded, AccountCircleSharp } from '@material-ui/icons';
+import { AppBar, Button, IconButton, Typography, Icon } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+
+function AuthButtons() {
+	return (
+		<div id='header-buttons'>
+			<Button variant='contained' id='login-button'>
+				<Link to='/login' variant='contained'>
+					Login
+				</Link>
+			</Button>
+			<Button variant='contained' id='register-button'>
+				<Link to='/register' variant='contained' id='register-button'>
+					Register
+				</Link>
+			</Button>
+		</div>
+	);
+}
+function NavButtons({ user }) {
+	return (
+		<div id='header-buttons'>
+			<Button variant='contained' id='profile-button'>
+				<Link to={`/profile/${user.username}`} id='profile-button'>
+					<AccountCircleSharp fontSize='medium' />
+				</Link>
+			</Button>
+			<Button id='logout-button' variant='contained'>
+				Logout
+			</Button>
+		</div>
+	);
+}
 
 export default function Header() {
 	const title = useSelector(state => state.app.title);
+	const { user, authenticated } = useSelector(state => state.auth);
 
 	return (
 		<AppBar id='main-header'>
 			<Icon id='logo'>
-				<MonetizationIcon fontSize='large'></MonetizationIcon>
+				<MonetizationOnRounded fontSize='large' />
 			</Icon>
 			<Typography variant='h2' id='header-title'>
 				{title}
 			</Typography>
-			<div id='header-buttons'>
-				<Link component={Button} to='/login' variant='contained' id='login-button'>
-					Login
-				</Link>
-				<Link component={Button} variant='contained' to='/register' id='register-button'>
-					Register
-				</Link>
-			</div>
+			{authenticated ? <NavButtons user={user} /> : <AuthButtons />}
 		</AppBar>
 	);
 }
