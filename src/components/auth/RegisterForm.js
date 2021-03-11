@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../../store/slices/auth.slice';
 
 import {
 	Container,
@@ -10,13 +11,35 @@ import {
 	Typography,
 	Input,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export default function RegisterForm() {
 	const dispatch = useDispatch();
 
+	const authenticated = useSelector(state => state.auth.authenticated);
+
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+
+	const handleSubmit = async e => {
+		e.preventDefault();
+
+		const resultAction = await dispatch(register({ username, password }));
+
+		if (register.fulfilled.match(resultAction)) {
+			const { user } = resultAction.payload;
+
+			console.log(user);
+		} else {
+			const { error, message } = resultAction.payload;
+
+			console.log(`${error}: ${message}`);
+		}
+	};
+
+	if (authenticated) {
+		return <Redirect to='/app' />;
+	}
 
 	return (
 		<Container id='register'>
@@ -41,7 +64,7 @@ export default function RegisterForm() {
 					/>
 				</FormControl>
 				<Link to='/login'>Already have an account? Login here.</Link>
-				<Button type='button' color='primary' variant='contained'>
+				<Button type='button' color='primary' variant='contained' onClick={handleSubmit}>
 					Submit
 				</Button>
 			</Paper>
