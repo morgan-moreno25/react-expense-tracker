@@ -22,12 +22,9 @@ export default function App() {
 		dispatch(loadUser());
 	}, [dispatch]);
 
-	if (authenticated) {
-		return <Redirect to='/app' />;
-	}
-
 	return (
 		<Router>
+			{authenticated ? <Redirect to='/app' /> : null}
 			<div className='App' id='app'>
 				<Header />
 				<Container id='content' maxWidth='xl'>
