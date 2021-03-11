@@ -164,24 +164,41 @@ $black: #000;
 	grid-area: content;
 	background-color: $light;
 	display: grid;
-	grid-template-columns: 25% 75%;
+	grid-template-columns: 20% 80%;
 	grid-template-areas: 'nav ledger';
-}
 
-#nav {
-	grid-area: nav;
-	background: $secondary;
-}
-#nav > nav {
-	height: 100%;
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(3, 1fr);
-	grid-template-areas:
-		'controls'
-		'form'
-		'.';
+	#nav {
+		grid-area: nav;
+		background: $secondary;
+
+		nav {
+			height: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			row-gap: 2rem;
+
+			div {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				align-content: center;
+
+				& > div {
+					justify-self: end;
+				}
+
+				svg {
+					color: $light;
+				}
+
+				a {
+					justify-self: start;
+					font-size: 1.4rem;
+					color: $light;
+				}
+			}
+		}
+	}
 }
 #form-controls {
 	grid-area: controls;
