@@ -20,7 +20,7 @@ export const login = createAsyncThunk('auth/login', async ({ username, password 
 
 		return payload;
 	} catch (error) {
-		return thunkAPI.rejectWithValue(error);
+		return thunkAPI.rejectWithValue(error.response.data);
 	}
 });
 export const register = createAsyncThunk(
@@ -41,7 +41,7 @@ export const register = createAsyncThunk(
 			};
 			return payload;
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error);
+			return thunkAPI.rejectWithValue(error.response.data);
 		}
 	}
 );
@@ -55,7 +55,7 @@ export const loadUser = createAsyncThunk('auth/loadUser', async (_, thunkAPI) =>
 		};
 		return payload;
 	} catch (error) {
-		return thunkAPI.rejectWithValue(error);
+		return thunkAPI.rejectWithValue(error.response.data);
 	}
 });
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
