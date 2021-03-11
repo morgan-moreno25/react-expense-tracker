@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../store/slices/auth.slice';
 
 import { MonetizationOnRounded, AccountCircleSharp } from '@material-ui/icons';
 import { AppBar, Button, IconButton, Typography, Icon } from '@material-ui/core';
@@ -22,6 +23,12 @@ function AuthButtons() {
 	);
 }
 function NavButtons({ user }) {
+	const dispatch = useDispatch();
+
+	const handleLogout = async e => {
+		dispatch(logout());
+	};
+
 	return (
 		<div id='header-buttons'>
 			<Button variant='contained' id='profile-button'>
@@ -30,7 +37,9 @@ function NavButtons({ user }) {
 				</Link>
 			</Button>
 			<Button id='logout-button' variant='contained'>
-				Logout
+				<Link to='/' onClick={handleLogout}>
+					Logout
+				</Link>
 			</Button>
 		</div>
 	);
