@@ -13,7 +13,7 @@ import { Container } from '@material-ui/core';
 import './App.scss';
 import RegisterForm from './components/auth/RegisterForm';
 
-export default function App() {
+export default function Site() {
 	const dispatch = useDispatch();
 
 	const authenticated = useSelector(state => state.auth.authenticated);
