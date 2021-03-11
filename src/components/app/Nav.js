@@ -6,16 +6,6 @@ import { Link } from 'react-router-dom';
 
 import Form from './Form';
 
-/**
- * @TODO
- *
- * Update this component so that it represents an actual navigation bar.
- * The navigation options should be:
- * - Dashboard
- * - Income
- * - Expenses
- */
-
 export default function Nav() {
 	return (
 		<Container id='nav'>
@@ -24,7 +14,7 @@ export default function Nav() {
 					<ListItemIcon>
 						<DashboardSharp />
 					</ListItemIcon>
-					<Link to='/app/dashboard'>Dashboard</Link>
+					<Link to='/app'>Dashboard</Link>
 				</ListItem>
 				<ListItem button>
 					<ListItemIcon>
