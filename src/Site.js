@@ -25,7 +25,7 @@ export default function App() {
 	return (
 		<Router>
 			{authenticated ? <Redirect to='/app' /> : null}
-			<div className='App' id='app'>
+			<div id='site'>
 				<Header />
 				<Container id='content' maxWidth='xl'>
 					<Switch>
