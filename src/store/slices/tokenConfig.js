@@ -8,7 +8,7 @@ export default function tokenConfig(getState) {
 	};
 
 	if (token) {
-		config['Authorization'] = `JWT ${token}`;
+		config.headers['Authorization'] = `JWT ${token}`;
 	}
 
 	return config;
