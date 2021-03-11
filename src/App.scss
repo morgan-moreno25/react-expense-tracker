@@ -165,7 +165,7 @@ $black: #000;
 	background-color: $light;
 	display: grid;
 	grid-template-columns: 20% 80%;
-	grid-template-areas: 'nav ledger';
+	grid-template-areas: 'nav content';
 
 	#nav {
 		grid-area: nav;
@@ -199,66 +199,44 @@ $black: #000;
 			}
 		}
 	}
+
+	#dashboard {
+		grid-area: content;
+		background: $white;
+		display: grid;
+		grid-template-rows: 20% 80%;
+		grid-template-areas:
+			'balances'
+			'charts';
+
+		#dashboard-balances {
+			grid-area: balances;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			justify-items: center;
+			align-items: center;
+			border-bottom: 2px solid $dark;
+
+			& > div {
+				background: $dark;
+				color: $white;
+				height: 60%;
+				width: 75%;
+
+				& > div {
+					display: grid;
+					grid-template-rows: repeat(2, 1fr);
+					justify-items: center;
+					align-content: center;
+				}
+			}
+		}
+		#dashboard-charts {
+			grid-area: charts;
+		}
+	}
 }
-#form-controls {
-	grid-area: controls;
-	display: grid;
-	justify-items: center;
-	align-items: center;
-}
-#form-section {
-	grid-area: form;
-	display: grid;
-	justify-items: center;
-	align-items: center;
-}
-#form-container {
-	display: grid;
-	height: 300px;
-	width: 200px;
-	justify-content: center;
-	align-content: center;
-	background: var(--blue-grey-light);
-	border-radius: 2%;
-}
-#income-form,
-#expense-form {
-	height: 300px;
-	width: 200px;
-	padding: 5px;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(4, 1fr);
-	justify-items: center;
-	align-items: center;
-}
-#income-form > h3,
-#expense-form > h3 {
-	font-size: 24px;
-	text-decoration: underline;
-	font-weight: bold;
-}
-#income-form > label,
-#expense-form > label {
-	font-weight: bold;
-}
-#income-form > button,
-#expense-form > button {
-	font-weight: bold;
-	color: white;
-	background: $primary;
-}
-#ledger {
-	grid-area: ledger;
-	background: $light;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 30% 70%;
-	grid-template-areas:
-		'balances balances'
-		'income expenses';
-	justify-items: center;
-}
+
 #balance-display {
 	grid-area: balances;
 	height: 100%;
