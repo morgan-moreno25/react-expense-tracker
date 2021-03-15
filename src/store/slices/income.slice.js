@@ -34,8 +34,8 @@ export const addIncome = createAsyncThunk(
 );
 export const updateIncome = createAsyncThunk(
 	'income/update',
-	async ({ id, income: { category, amount } }, thunkAPI) => {
-		const body = JSON.stringify({ category, amount });
+	async ({ id, income: { date, category, amount } }, thunkAPI) => {
+		const body = JSON.stringify({ date, category, amount });
 		const config = tokenConfig(thunkAPI.getState);
 
 		try {
