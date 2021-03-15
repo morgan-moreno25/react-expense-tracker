@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import stringifyBalance from '../../utils/stringifyBalance';
 
 import { Box, Card, Container, Typography, CardContent, Paper } from '@material-ui/core';
+import { AreaChart } from 'recharts';
 
 export default function Dashboard() {
 	const expenses = useSelector(state => state.expense.data);
@@ -21,20 +22,20 @@ export default function Dashboard() {
 					<CardContent>
 						<Typography variant='h4'>{title}</Typography>
 						<Typography variant='h4' className={balanceClass}>
-							{stringifyBalance(netBalance)}
+							${netBalance}
 						</Typography>
 					</CardContent>
 				</Card>
 				<Card component={Paper} elevation={10} variant='outlined'>
 					<CardContent>
 						<Typography variant='h4'>Total Income</Typography>
-						<Typography variant='h4'>{stringifyBalance(totalIncome)}</Typography>
+						<Typography variant='h4'>${totalIncome}</Typography>
 					</CardContent>
 				</Card>
 				<Card component={Paper} elevantion={10} variant='outlined'>
 					<CardContent>
 						<Typography variant='h4'>Total Expenses</Typography>
-						<Typography variant='h4'>{stringifyBalance(totalExpense)}</Typography>
+						<Typography variant='h4'>${totalExpense}</Typography>
 					</CardContent>
 				</Card>
 			</Container>
