@@ -15,20 +15,23 @@ export const getAllIncome = createAsyncThunk('income/getAll', async (_, thunkAPI
 		return thunkAPI.rejectWithValue(error.response.data);
 	}
 });
-export const addIncome = createAsyncThunk('income/add', async ({ category, amount }, thunkAPI) => {
-	const body = JSON.stringify({ category, amount });
-	const config = tokenConfig(thunkAPI.getState);
+export const addIncome = createAsyncThunk(
+	'income/add',
+	async ({ date, category, amount }, thunkAPI) => {
+		const body = JSON.stringify({ date, category, amount });
+		const config = tokenConfig(thunkAPI.getState);
 
-	try {
-		const response = await axios.post('/api/income', body, config);
-		const payload = {
-			income: response.data.income,
-		};
-		return payload;
-	} catch (error) {
-		return thunkAPI.rejectWithValue(error.response.data);
+		try {
+			const response = await axios.post('/api/income', body, config);
+			const payload = {
+				income: response.data.income,
+			};
+			return payload;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
 	}
-});
+);
 export const updateIncome = createAsyncThunk(
 	'income/update',
 	async ({ id, income: { category, amount } }, thunkAPI) => {
