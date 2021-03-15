@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import tokenConfig from './tokenConfig';
 import axios from 'axios';
 
-export const getAllExpense = createAsyncThunk('expense/getAll', async (_, thunkAPI) => {
+export const getAllExpenses = createAsyncThunk('expense/getAll', async (_, thunkAPI) => {
 	const config = tokenConfig(thunkAPI.getState);
 
 	try {
 		const response = await axios.get('/api/expenses', config);
 		const payload = {
-			expense: response.data.expense,
+			expenses: response.data.expenses,
 		};
 		return payload;
 	} catch (error) {
@@ -73,7 +73,7 @@ const expenseSlice = createSlice({
 	},
 	reducers: {},
 	extraReducers: builder => {
-		builder.addCase(getAllExpense.pending, state => {
+		builder.addCase(getAllExpenses.pending, state => {
 			state.isLoading = true;
 		});
 		builder.addCase(addExpense.pending, state => {
@@ -85,9 +85,9 @@ const expenseSlice = createSlice({
 		builder.addCase(deleteExpense.pending, state => {
 			state.isLoading = true;
 		});
-		builder.addCase(getAllExpense.fulfilled, (state, { payload }) => {
+		builder.addCase(getAllExpenses.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
-			state.data = payload.expense;
+			state.data = payload.expenses;
 		});
 		builder.addCase(addExpense.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
@@ -104,7 +104,7 @@ const expenseSlice = createSlice({
 			state.isLoading = false;
 			state.data = state.data.filter(d => d.id !== payload.id);
 		});
-		builder.addCase(getAllExpense.rejected, (state, { payload }) => {
+		builder.addCase(getAllExpenses.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			state.error = payload;
 		});
