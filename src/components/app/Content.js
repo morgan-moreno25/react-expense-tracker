@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import Income from './income';
-import ExpenseTable from './ExpenseTable';
+import Expenses from './expenses';
 
 export default function Content() {
 	return (
@@ -15,7 +15,7 @@ export default function Content() {
 				<Income />
 			</Route>
 			<Route path='/app/expenses'>
-				<ExpenseTable />
+				<Expenses />
 			</Route>
 		</Switch>
 	);

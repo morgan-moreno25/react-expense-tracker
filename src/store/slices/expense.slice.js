@@ -17,8 +17,8 @@ export const getAllExpenses = createAsyncThunk('expense/getAll', async (_, thunk
 });
 export const addExpense = createAsyncThunk(
 	'expense/add',
-	async ({ category, amount }, thunkAPI) => {
-		const body = JSON.stringify({ category, amount });
+	async ({ date, category, amount }, thunkAPI) => {
+		const body = JSON.stringify({ date, category, amount });
 		const config = tokenConfig(thunkAPI.getState);
 
 		try {
