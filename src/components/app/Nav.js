@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 
-import { Container, Button, Paper, List, ListItem, ListItemIcon } from '@material-ui/core';
+import { Container, List, ListItem, ListItemIcon } from '@material-ui/core';
 import { DashboardSharp, AttachMoneySharp, ExitToAppSharp } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-
-import Form from './Form';
 
 export default function Nav() {
 	return (
