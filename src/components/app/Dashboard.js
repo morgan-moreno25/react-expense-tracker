@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { Box, Card, Container, Typography, CardContent, Paper } from '@material-ui/core';
+import Charts from './Chart';
 
 export default function Dashboard() {
 	const expenses = useSelector(state => state.expense.data);
@@ -41,9 +42,7 @@ export default function Dashboard() {
 					</CardContent>
 				</Card>
 			</Container>
-			<Container id='dashboard-charts'>
-				<p>Charts go here</p>
-			</Container>
+			<Charts />
 		</Box>
 	);
 }

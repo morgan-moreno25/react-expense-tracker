@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import tokenConfig from './tokenConfig';
 import axios from 'axios';
@@ -122,5 +123,33 @@ const incomeSlice = createSlice({
 		});
 	},
 });
+
+export const useIncomeByMonth = () => {
+	const income = useSelector(state => state.income.data);
+
+	const incomeByMonth = [];
+
+	income.forEach(inc => {
+		const month = inc.date.month;
+
+		const monthExists = incomeByMonth.findIndex(i => i.month === month);
+
+		if (monthExists === -1) {
+			incomeByMonth.push({
+				month: month,
+				amount: inc.amount,
+			});
+		} else {
+			const toEdit = incomeByMonth[monthExists];
+
+			incomeByMonth[monthExists] = { ...toEdit, amount: (toEdit.amount += inc.amount) };
+		}
+	});
+
+	incomeByMonth.sort((a, b) => a.month - b.month);
+	console.log(incomeByMonth);
+
+	return incomeByMonth;
+};
 
 export default incomeSlice.reducer;

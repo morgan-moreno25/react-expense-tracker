@@ -238,6 +238,30 @@ $black: #000;
 		}
 		#dashboard-charts {
 			grid-area: charts;
+			margin-top: 2rem;
+			margin-bottom: 2rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+
+			#by-month {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				align-content: center;
+				justify-content: center;
+				background: $dark;
+
+				& > h2 {
+					color: $primary;
+					text-align: center;
+					font-size: 1.4rem;
+				}
+				& > div {
+					justify-self: center;
+					align-self: center;
+				}
+			}
 		}
 	}
 
