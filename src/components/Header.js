@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store/slices/auth.slice';
 
 import { MonetizationOnRounded, AccountCircleSharp } from '@material-ui/icons';
-import { AppBar, Button, IconButton, Typography, Icon } from '@material-ui/core';
+import { AppBar, Button, Typography, Icon } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 function AuthButtons() {

@@ -1,9 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import stringifyBalance from '../../utils/stringifyBalance';
 
 import { Box, Card, Container, Typography, CardContent, Paper } from '@material-ui/core';
-import { AreaChart } from 'recharts';
 
 export default function Dashboard() {
 	const expenses = useSelector(state => state.expense.data);
@@ -45,7 +43,3 @@ export default function Dashboard() {
 		</Box>
 	);
 }
-
-const summaryStyle = {
-	fontWeight: 'bold',
-};

@@ -6,8 +6,6 @@ import { loadUser } from './store/slices/auth.slice';
 import Header from './components/Header';
 import LoginForm from './components/auth/LoginForm';
 
-import { Container } from '@material-ui/core';
-
 import './App.scss';
 import RegisterForm from './components/auth/RegisterForm';
 import App from './components/app';

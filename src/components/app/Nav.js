@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Container, List, ListItem, ListItemIcon } from '@material-ui/core';
 import { DashboardSharp, AttachMoneySharp, ExitToAppSharp } from '@material-ui/icons';
