@@ -147,7 +147,6 @@ export const useIncomeByMonth = () => {
 	});
 
 	incomeByMonth.sort((a, b) => a.month - b.month);
-	console.log(incomeByMonth);
 
 	return incomeByMonth;
 };

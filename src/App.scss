@@ -49,14 +49,16 @@ $black: #000;
 		grid-area: title;
 		font-weight: bold;
 		text-shadow: 1px 1px $primary;
+		font-size: 2rem;
 	}
 	#header-buttons {
 		grid-area: buttons;
 		height: 100%;
 		width: 100%;
 		padding: 25px;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
 
 		#login-button,
 		#register-button,
@@ -89,13 +91,12 @@ $black: #000;
 		#profile-button {
 			color: $black;
 			background: $light;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			column-gap: 0.2rem;
-			justify-items: center;
-			align-items: center;
+			display: flex;
+			flex-direction: row;
 
 			svg {
+				align-self: center;
+				margin-right: 0.5rem;
 				height: 1.4rem;
 				width: 1.4rem;
 			}
@@ -184,9 +185,9 @@ $black: #000;
 			row-gap: 2rem;
 
 			div {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-				align-content: center;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
 
 				& > div {
 					justify-self: end;
@@ -200,6 +201,7 @@ $black: #000;
 					justify-self: start;
 					font-size: 1.4rem;
 					color: $light;
+					text-decoration: none;
 				}
 			}
 		}

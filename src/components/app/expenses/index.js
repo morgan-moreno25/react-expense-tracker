@@ -47,7 +47,7 @@ export default function Expense() {
 			<EditExpenseModal open={editModalOpen} toggle={toggleEditModal} expense={editExpense} />
 			<AddExpenseModal />
 			<Container maxWidth='lg' id='expense-filters'>
-				TODO: Add inputs to filter the table data
+				{' '}
 			</Container>
 			<TableContainer component={Paper} id='expense-table-container'>
 				<Table id='expense-table'>

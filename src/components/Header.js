@@ -31,11 +31,6 @@ function NavButtons({ user }) {
 
 	return (
 		<div id='header-buttons'>
-			<Button variant='contained' id='profile-button'>
-				<Link to={`/profile/${user.username}`} id='profile-button'>
-					<AccountCircleSharp /> Profile
-				</Link>
-			</Button>
 			<Button id='logout-button' variant='contained'>
 				<Link to='/' onClick={handleLogout}>
 					Logout

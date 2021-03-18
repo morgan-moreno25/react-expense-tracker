@@ -21,20 +21,10 @@ export default function RegisterForm() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
-	const handleSubmit = async e => {
+	const handleSubmit = e => {
 		e.preventDefault();
 
-		const resultAction = await dispatch(register({ username, password }));
-
-		if (register.fulfilled.match(resultAction)) {
-			const { user } = resultAction.payload;
-
-			console.log(user);
-		} else {
-			const { error, message } = resultAction.payload;
-
-			console.log(`${error}: ${message}`);
-		}
+		dispatch(register({ username, password }));
 	};
 
 	if (authenticated) {

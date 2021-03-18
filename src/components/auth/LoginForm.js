@@ -25,18 +25,10 @@ export default function LoginForm() {
 		return <Redirect to='/app' />;
 	}
 
-	const handleSubmit = async e => {
+	const handleSubmit = e => {
 		e.preventDefault();
 
-		const resultAction = await dispatch(login({ username, password }));
-
-		if (login.fulfilled.match(resultAction)) {
-			const { user } = resultAction.payload;
-
-			console.log(user);
-		} else {
-			console.log(resultAction.payload);
-		}
+		dispatch(login({ username, password }));
 	};
 
 	return (

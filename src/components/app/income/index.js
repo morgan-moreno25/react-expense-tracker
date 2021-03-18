@@ -46,7 +46,7 @@ export default function Income() {
 			<EditIncomeModal open={editModalOpen} toggle={toggleEditModal} income={editIncome} />
 			<AddIncomeModal />
 			<Container maxWidth='lg' id='income-filters'>
-				TODO: Add inputs to filter the table data
+				{' '}
 			</Container>
 			<TableContainer component={Paper} id='income-table-container'>
 				<Table id='income-table'>
