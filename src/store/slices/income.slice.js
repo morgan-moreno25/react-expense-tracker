@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import tokenConfig from './tokenConfig';
 import axios from 'axios';
@@ -15,24 +16,27 @@ export const getAllIncome = createAsyncThunk('income/getAll', async (_, thunkAPI
 		return thunkAPI.rejectWithValue(error.response.data);
 	}
 });
-export const addIncome = createAsyncThunk('income/add', async ({ category, amount }, thunkAPI) => {
-	const body = JSON.stringify({ category, amount });
-	const config = tokenConfig(thunkAPI.getState);
+export const addIncome = createAsyncThunk(
+	'income/add',
+	async ({ date, category, amount }, thunkAPI) => {
+		const body = JSON.stringify({ date, category, amount });
+		const config = tokenConfig(thunkAPI.getState);
 
-	try {
-		const response = await axios.post('/api/income', body, config);
-		const payload = {
-			income: response.data.income,
-		};
-		return payload;
-	} catch (error) {
-		return thunkAPI.rejectWithValue(error.response.data);
+		try {
+			const response = await axios.post('/api/income', body, config);
+			const payload = {
+				income: response.data.income,
+			};
+			return payload;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
 	}
-});
+);
 export const updateIncome = createAsyncThunk(
 	'income/update',
-	async ({ id, income: { category, amount } }, thunkAPI) => {
-		const body = JSON.stringify({ category, amount });
+	async ({ id, income: { date, category, amount } }, thunkAPI) => {
+		const body = JSON.stringify({ date, category, amount });
 		const config = tokenConfig(thunkAPI.getState);
 
 		try {
@@ -119,5 +123,32 @@ const incomeSlice = createSlice({
 		});
 	},
 });
+
+export const useIncomeByMonth = () => {
+	const income = useSelector(state => state.income.data);
+
+	const incomeByMonth = [];
+
+	income.forEach(inc => {
+		const month = inc.date.month;
+
+		const monthExists = incomeByMonth.findIndex(i => i.month === month);
+
+		if (monthExists === -1) {
+			incomeByMonth.push({
+				month: month,
+				amount: inc.amount,
+			});
+		} else {
+			const toEdit = incomeByMonth[monthExists];
+
+			incomeByMonth[monthExists] = { ...toEdit, amount: (toEdit.amount += inc.amount) };
+		}
+	});
+
+	incomeByMonth.sort((a, b) => a.month - b.month);
+
+	return incomeByMonth;
+};
 
 export default incomeSlice.reducer;

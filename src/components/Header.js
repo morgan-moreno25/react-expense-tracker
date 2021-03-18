@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store/slices/auth.slice';
 
 import { MonetizationOnRounded, AccountCircleSharp } from '@material-ui/icons';
-import { AppBar, Button, IconButton, Typography, Icon } from '@material-ui/core';
+import { AppBar, Button, Typography, Icon } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 function AuthButtons() {
@@ -31,11 +31,6 @@ function NavButtons({ user }) {
 
 	return (
 		<div id='header-buttons'>
-			<Button variant='contained' id='profile-button'>
-				<Link to={`/profile/${user.username}`} id='profile-button'>
-					<AccountCircleSharp /> Profile
-				</Link>
-			</Button>
 			<Button id='logout-button' variant='contained'>
 				<Link to='/' onClick={handleLogout}>
 					Logout

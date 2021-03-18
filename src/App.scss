@@ -11,7 +11,7 @@ $black: #000;
 
 /* Main */
 
-#app {
+#site {
 	display: grid;
 	grid-template-columns: 100vw;
 	grid-template-rows: 10vh 90vh;
@@ -49,14 +49,16 @@ $black: #000;
 		grid-area: title;
 		font-weight: bold;
 		text-shadow: 1px 1px $primary;
+		font-size: 2rem;
 	}
 	#header-buttons {
 		grid-area: buttons;
 		height: 100%;
 		width: 100%;
 		padding: 25px;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
 
 		#login-button,
 		#register-button,
@@ -68,6 +70,10 @@ $black: #000;
 
 			span {
 				font-size: 1.2rem;
+			}
+
+			a {
+				text-decoration: none;
 			}
 		}
 
@@ -85,13 +91,12 @@ $black: #000;
 		#profile-button {
 			color: $black;
 			background: $light;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			column-gap: 0.2rem;
-			justify-items: center;
-			align-items: center;
+			display: flex;
+			flex-direction: row;
 
 			svg {
+				align-self: center;
+				margin-right: 0.5rem;
 				height: 1.4rem;
 				width: 1.4rem;
 			}
@@ -107,14 +112,10 @@ $black: #000;
 	}
 }
 
-#content {
-	grid-area: content;
-	background-color: $light;
-}
-
 /* Authentication Forms */
 #login,
 #register {
+	grid-area: content;
 	height: 100%;
 	width: 100%;
 	display: grid;
@@ -160,105 +161,232 @@ $black: #000;
 	}
 }
 
-/* Register Page */
-
 /* App Content */
-#nav {
-	grid-area: nav;
-	background: $secondary;
-}
-#nav > nav {
-	height: 100%;
-	width: 100%;
+
+#content {
+	height: 90vh;
+	width: 100vw;
+	padding: 0;
+	grid-area: content;
+	background-color: $light;
 	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(3, 1fr);
-	grid-template-areas:
-		'controls'
-		'form'
-		'.';
+	grid-template-columns: 15% 85%;
+	grid-template-areas: 'nav content';
+
+	#nav {
+		grid-area: nav;
+		background: $secondary;
+
+		nav {
+			height: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			row-gap: 2rem;
+
+			div {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
+
+				& > div {
+					justify-self: end;
+				}
+
+				svg {
+					color: $light;
+				}
+
+				a {
+					justify-self: start;
+					font-size: 1.4rem;
+					color: $light;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	#dashboard {
+		grid-area: content;
+		background: $white;
+		display: grid;
+		grid-template-rows: 20% 80%;
+		grid-template-areas:
+			'balances'
+			'charts';
+
+		#dashboard-balances {
+			grid-area: balances;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			justify-items: center;
+			align-items: center;
+			border-bottom: 2px solid $dark;
+
+			& > div {
+				background: $dark;
+				color: $white;
+				height: 60%;
+				width: 75%;
+
+				& > div {
+					display: grid;
+					grid-template-rows: repeat(2, 1fr);
+					justify-items: center;
+					align-content: center;
+				}
+			}
+		}
+		#dashboard-charts {
+			grid-area: charts;
+			margin-top: 2rem;
+			margin-bottom: 2rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+
+			#by-month {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				align-content: center;
+				justify-content: center;
+				background: $dark;
+
+				& > h2 {
+					color: $primary;
+					text-align: center;
+					font-size: 1.4rem;
+				}
+				& > div {
+					justify-self: center;
+					align-self: center;
+				}
+			}
+		}
+	}
+
+	#income,
+	#expense {
+		background: $white;
+		display: grid;
+		grid-template-rows: 10% 10% 80%;
+		grid-template-areas:
+			'add'
+			'filters'
+			'data';
+
+		#income-add,
+		#expense-add {
+			grid-area: add;
+			display: grid;
+			justify-items: center;
+			align-items: center;
+
+			button {
+				color: $white;
+				background: $success;
+
+				span {
+					font-weight: bold;
+				}
+			}
+		}
+
+		#income-filters,
+		#expense-filters {
+			grid-area: filters;
+		}
+
+		#income-table-container,
+		#expense-table-container {
+			grid-area: data;
+			height: 100%;
+			padding: 1.5rem;
+
+			#income-table {
+				overflow-y: scroll;
+			}
+		}
+	}
 }
-#form-controls {
-	grid-area: controls;
+
+#income-add-modal,
+#income-edit-modal,
+#expense-add-modal,
+#expense-edit-modal {
 	display: grid;
-	justify-items: center;
-	align-items: center;
-}
-#form-section {
-	grid-area: form;
-	display: grid;
-	justify-items: center;
-	align-items: center;
-}
-#form-container {
-	display: grid;
-	height: 300px;
-	width: 200px;
 	justify-content: center;
 	align-content: center;
-	background: var(--blue-grey-light);
-	border-radius: 2%;
-}
-#income-form,
-#expense-form {
-	height: 300px;
-	width: 200px;
-	padding: 5px;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(4, 1fr);
-	justify-items: center;
-	align-items: center;
-}
-#income-form > h3,
-#expense-form > h3 {
-	font-size: 24px;
-	text-decoration: underline;
-	font-weight: bold;
-}
-#income-form > label,
-#expense-form > label {
-	font-weight: bold;
-}
-#income-form > button,
-#expense-form > button {
-	font-weight: bold;
-	color: white;
-	background: $primary;
-}
-#ledger {
-	grid-area: ledger;
-	background: $light;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 30% 70%;
-	grid-template-areas:
-		'balances balances'
-		'income expenses';
-	justify-items: center;
-}
-#balance-display {
-	grid-area: balances;
-	height: 100%;
-	width: 100%;
-}
-#income-table-container {
-	grid-area: income;
-	height: 100%;
-	width: 100%;
-	background: inherit;
-	padding: 20px;
-}
-#expense-table-container {
-	grid-area: expenses;
-	height: 100%;
-	width: 100%;
-	background: inherit;
-	padding: 20px;
-}
-#income-table,
-#expense-table {
-	background: white;
+
+	#income-add-form,
+	#income-edit-form,
+	#expense-add-form,
+	#expense-edit-form {
+		height: 75vh;
+		width: 50vw;
+		padding: 3rem;
+		display: grid;
+		grid-template-rows: repeat(5, 1fr);
+		background: $light-gray;
+
+		h3 {
+			text-align: center;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+
+		& > div {
+			& > div {
+				font-size: 1.4rem;
+			}
+			label {
+				font-size: 1.4rem;
+			}
+			input {
+				font-size: 1.4rem;
+			}
+		}
+
+		#income-add-form-buttons,
+		#income-edit-form-buttons,
+		#expense-add-form-buttons,
+		#expense-edit-form-buttons {
+			width: 100%;
+			display: grid;
+			grid-template-rows: repeat(2, 1fr);
+
+			button {
+				height: 50%;
+				width: 75%;
+				justify-self: center;
+			}
+
+			#income-add-submit,
+			#income-edit-submit,
+			#expense-add-submit,
+			#expense-edit-submit {
+				background: $success;
+				color: $white;
+
+				span {
+					font-weight: bold;
+				}
+			}
+			#income-add-cancel,
+			#income-edit-cancel,
+			#expense-add-cancel,
+			#expense-edit_cancel {
+				background: $danger;
+				color: $white;
+
+				span {
+					font-weight: bold;
+				}
+			}
+		}
+	}
 }
 
 /* Table Classes*/
